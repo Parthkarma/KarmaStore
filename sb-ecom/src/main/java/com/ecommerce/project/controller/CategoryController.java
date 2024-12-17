@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/public")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -21,19 +22,23 @@ public class CategoryController {
 //Spring finds the appropriate bean (a managed object) and provides it.
 
 
-    @GetMapping("/api/public/categories")
+//    @GetMapping("/api/public/categories")
+    @RequestMapping(value = "/categories" , method = RequestMethod.GET)
+
     public ResponseEntity<List<Category>> getAllCategories(){
 
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories , HttpStatus.OK);
     }
 
-    @PostMapping("/api/public/categories")
+//    @PostMapping("/api/public/categories")
+    @RequestMapping(value = "/categories" , method = RequestMethod.POST)
     public ResponseEntity<String> createCategory(@RequestBody Category category){
         categoryService.createCategory(category);
         return new ResponseEntity<>("Category added successfully" , HttpStatus.CREATED);
     }
-    @DeleteMapping("/api/public/categories/{categoryId}")
+//    @DeleteMapping("/api/public/categories/{categoryId}")
+    @RequestMapping(value = "/api/public/categories/{categoryId}" , method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId){
 
       try{
@@ -45,7 +50,9 @@ public class CategoryController {
           return new ResponseEntity<>(e.getReason() , e.getStatusCode());
       }
     }
-    @PutMapping("/api/public/categories/{categoryId}")
+
+//    @PutMapping("/api/public/categories/{categoryId}")
+    @RequestMapping(value = "/api/public/categories/{categoryId}" , method = RequestMethod.PUT)
     public ResponseEntity<String> updateCategory(@RequestBody Category category , @PathVariable Long categoryId){
         try{
                   Category savedCategory  = categoryService.updateCategory(category , categoryId) ;
