@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+//@Service Annotation:
+//Marks CategoryServiceImpl as a Spring-managed bean.
+//Spring will create an instance of this class when needed.
 public class CategoryServiceImpl implements CategoryService{
     private List<Category> categories = new ArrayList<>();
     private Long nextId = 1L;
@@ -24,7 +27,6 @@ public class CategoryServiceImpl implements CategoryService{
         category.setCategoryId(nextId++);
         categories.add(category);
     }
-
     @Override
     public String deleteCategory(Long categoryId) {
         Category category = categories.stream().filter(c -> c.getCategoryId().equals(categoryId)).findFirst().

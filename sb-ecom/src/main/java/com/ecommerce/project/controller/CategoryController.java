@@ -16,6 +16,11 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+//     @Autowired is a Spring annotation that performs Dependency Injection.
+//It tells the Spring container to automatically inject an instance of the CategoryService
+// class (or its implementation) into the categoryService variable.
+//Spring finds the appropriate bean (a managed object) and provides it.
+
 
     @GetMapping("/api/public/categories")
     public List<Category> getAllCategories(){
@@ -37,5 +42,4 @@ public class CategoryController {
           return new ResponseEntity<>(e.getReason() , e.getStatusCode());
       }
     }
-
 }
