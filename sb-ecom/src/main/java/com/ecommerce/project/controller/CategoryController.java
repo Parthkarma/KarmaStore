@@ -29,7 +29,6 @@ public class CategoryController {
         CategoryResponse categoryResponse =  categoryService.getAllCategories();
         return new ResponseEntity<>(categoryResponse , HttpStatus.OK);
     }
-
 //    @PostMapping("/api/public/categories")
     @RequestMapping(value = "/categories" , method = RequestMethod.POST)
     public ResponseEntity<String> createCategory(@Valid @RequestBody Category category) throws APIException {

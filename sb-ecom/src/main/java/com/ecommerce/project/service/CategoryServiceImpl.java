@@ -1,5 +1,6 @@
 package com.ecommerce.project.service;
 
+import org.modelmapper.ModelMapper;
 import com.ecommerce.project.exceptions.APIException;
 import com.ecommerce.project.exceptions.ResourceNotFoundException;
 import com.ecommerce.project.model.Category;
@@ -30,17 +31,12 @@ public class CategoryServiceImpl implements CategoryService{
         if(categories.isEmpty())
             throw new APIException("No category created till now.") ;
 //        List<CategoryDTO> categoryDTOS = categories.stream().map(category -> (CategoryDTO) modelMapper.map(category, CategoryDTO.class )).toList() ;
+        List<CategoryDTO> categoryDTOS = categories.stream().map(category -> (CategoryDTO) modelMapper.map(category , CategoryDTO.class )).toList();
 
-        List<CategoryDTO> categoryDTOS = categories.stream()
-             .map(category -> modelMapper.map(category, CategoryDTO.class))
-             .toList();
-        CategoryResponse categoryResponse = new CategoryResponse();
+     CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent(categoryDTOS);
         return categoryResponse;
-
-
     }
-
     @Override
     public void createCategory(Category category) throws APIException {
         Category savedCategory = categoryRepository.findByCategoryName((category.getCategoryName()));
