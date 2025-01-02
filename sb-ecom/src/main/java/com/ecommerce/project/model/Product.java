@@ -16,9 +16,9 @@ public class Product {
  private Long productId ;
  private String productName ;
  private String image ;
- private String Description ;
+ private String description;
  private Integer quantity ;
- private double Price ;
+ private double price ;
  private double specialPrice ;
  private double discount ;
 
