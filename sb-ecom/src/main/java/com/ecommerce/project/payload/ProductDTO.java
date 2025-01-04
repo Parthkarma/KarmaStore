@@ -1,6 +1,9 @@
 package com.ecommerce.project.payload;
 
 
+import com.ecommerce.project.model.Category;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +20,8 @@ public class ProductDTO {
  private double price ;
  private double discount ;
  private double specialPrice ;
+
+ @ManyToOne
+ @JoinColumn(name = "category_id")
+ private Category category;
 }
