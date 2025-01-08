@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.net.ProtocolFamily;
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,4 +26,7 @@ private AppRole  rolename;
   this.rolename = rolename;
  }
 
+ public ProtocolFamily getRoleName() {
+  return null;
+ }
 }
