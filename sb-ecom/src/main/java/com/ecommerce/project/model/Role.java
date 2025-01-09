@@ -21,9 +21,9 @@ public class Role {
  @ToString.Exclude
  @Enumerated(EnumType.STRING)
  @Column(length = 20 , name = "role_name")
-private AppRole  rolename;
+private AppRole  roleName;
  public Role(AppRole rolename) {
-  this.rolename = rolename;
+  this.roleName = rolename;
  }
 
  public ProtocolFamily getRoleName() {
