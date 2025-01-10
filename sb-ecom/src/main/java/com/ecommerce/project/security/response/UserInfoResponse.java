@@ -1,9 +1,11 @@
 package com.ecommerce.project.security.response;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
 @Getter
 public class UserInfoResponse {
     private Long id ;
@@ -19,21 +21,6 @@ public class UserInfoResponse {
         this.jwtToken = jwtToken;
     }
 
- public void setId(Long id) {
-        this.id = id;
-    }
-
- public void setJwtToken(String jwtToken) {
-        this.jwtToken = jwtToken;
-    }
-
- public void setUsername(String username) {
-        this.username = username;
-    }
-
- public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
 }
 
 

@@ -10,7 +10,7 @@ import com.ecommerce.project.model.User;
 import com.ecommerce.project.repositories.*;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
+@Autowired
     UserRepository userRepository;
     @Override
     @Transactional

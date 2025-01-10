@@ -2,7 +2,9 @@ package com.ecommerce.project.security.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public class LoginRequest {
     @NotBlank
@@ -10,11 +12,4 @@ public class LoginRequest {
     @NotBlank
     private String password;
 
- public void setUsername(String username) {
-        this.username = username;
-    }
-
- public void setPassword(String password) {
-        this.password = password;
-    }
 }
