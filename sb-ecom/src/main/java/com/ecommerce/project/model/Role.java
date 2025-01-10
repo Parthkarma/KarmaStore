@@ -25,7 +25,6 @@ private AppRole  roleName;
  public Role(AppRole rolename) {
   this.roleName = rolename;
  }
-
  public ProtocolFamily getRoleName() {
   return null;
  }
