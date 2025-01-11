@@ -21,10 +21,7 @@ import org.springframework.security.core.AuthenticationException;
 import com.ecommerce.project.security.request.SignupRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,8 +45,9 @@ public class AuthController {
     @Autowired
     PasswordEncoder encoder;
 
-    @PostMapping("/signing")
+    @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+
         Authentication authentication;
         try {
             authentication = authenticationManager
@@ -58,7 +56,8 @@ public class AuthController {
             Map<String, Object> map = new HashMap<>();
             map.put("message", "Bad credentials");
             map.put("status", false);
-            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Object>(map, HttpStatus.UNAUTHORIZED);
+
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -71,6 +70,10 @@ public class AuthController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        return ResponseEntity.ok("API is working");
+    }
     @PostMapping("/signup")
     public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUserName(String.valueOf(signUpRequest.getUsername()))){
@@ -80,7 +83,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
         // Create new user's account
-        User user = new User(signUpRequest.getClass(),
+        User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 

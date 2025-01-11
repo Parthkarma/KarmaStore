@@ -1,7 +1,7 @@
 package com.ecommerce.project.model;
-import com.ecommerce.project.security.request.SignupRequest;
+
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
+
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -59,6 +59,5 @@ private List<Address> adressess = new ArrayList<>() ;
 orphanRemoval = true )
  private  Set<Product> products;
 
- public User(Class<? extends @Valid SignupRequest> aClass, @NotBlank @Size(max = 50) @Email String email, String encode) {
- }
+
 }
