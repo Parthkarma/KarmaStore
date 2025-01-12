@@ -1,5 +1,4 @@
 package com.ecommerce.project.controller;
-import com.ecommerce.project.security.response.MessageResponse;
 
 import com.ecommerce.project.model.AppRole;
 import com.ecommerce.project.model.Role;
@@ -8,6 +7,8 @@ import com.ecommerce.project.repositories.RoleRepository;
 import com.ecommerce.project.repositories.UserRepository;
 import com.ecommerce.project.security.jwt.JwtUtils;
 import com.ecommerce.project.security.request.LoginRequest;
+import com.ecommerce.project.security.request.SignupRequest;
+import com.ecommerce.project.security.response.MessageResponse;
 import com.ecommerce.project.security.response.UserInfoResponse;
 import com.ecommerce.project.security.services.UserDetailsImpl;
 import jakarta.validation.Valid;
@@ -18,10 +19,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import com.ecommerce.project.security.request.SignupRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,7 +50,6 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-
         Authentication authentication;
         try {
             authentication = authenticationManager
@@ -56,32 +58,35 @@ public class AuthController {
             Map<String, Object> map = new HashMap<>();
             map.put("message", "Bad credentials");
             map.put("status", false);
-            return new ResponseEntity<Object>(map, HttpStatus.UNAUTHORIZED);
-
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
         String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
+
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+
         UserInfoResponse response = new UserInfoResponse(userDetails.getId(),
                 userDetails.getUsername(), roles, jwtToken);
 
         return ResponseEntity.ok(response);
     }
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
-        return ResponseEntity.ok("API is working");
-    }
+
     @PostMapping("/signup")
-    public ResponseEntity<MessageResponse> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByUserName(String.valueOf(signUpRequest.getUsername()))){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (userRepository.existsByUserName(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
+
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
@@ -101,6 +106,7 @@ public class AuthController {
                         Role adminRole = roleRepository.findByRoleName(AppRole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
+
                         break;
                     case "seller":
                         Role modRole = roleRepository.findByRoleName(AppRole.ROLE_SELLER)
