@@ -72,7 +72,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/v3/api-docs/**").permitAll()
                                 .requestMatchers("/h2-console/**").permitAll()
 //                                .requestMatchers("/api/admin/**").permitAll()
-//                                .requestMatchers("/api/public/**").permitAll()
+//                               .requestMatchers("/api/public/**").permitAll()
                                 .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/test/**").permitAll()
                                 .requestMatchers("/images/**").permitAll()
@@ -97,7 +97,6 @@ public class WebSecurityConfig {
                 "/swagger-ui.html",
                 "/webjars/**"));
     }
-
 
     @Bean
     public CommandLineRunner initData(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
