@@ -71,10 +71,11 @@ public class AuthController {
                 .collect(Collectors.toList());
 
         UserInfoResponse response = new UserInfoResponse(userDetails.getId(),
-                userDetails.getUsername(), roles , jwtCookie.toString());
+                userDetails.getUsername(), roles, jwtCookie.toString());
 
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE , jwtCookie.toString())
-             .body(response);
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,
+                jwtCookie.toString())
+                .body(response);
     }
 
     @PostMapping("/signup")
@@ -90,8 +91,7 @@ public class AuthController {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword())
-        );
+                encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -127,33 +127,36 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
 
-    }
     @GetMapping("/username")
-    public String getUserByUsername(Authentication authentication) {
-        if(authentication != null)
-            return authentication.getName() ;
-        return "";
+    public String currentUserName(Authentication authentication){
+        if (authentication != null)
+            return authentication.getName();
+        else
+            return "";
     }
+
+
     @GetMapping("/user")
-    public ResponseEntity<UserInfoResponse> getUserDetails(Authentication authentication) {
+    public ResponseEntity<?> getUserDetails(Authentication authentication){
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
         List<String> roles = userDetails.getAuthorities().stream()
-             .map(item -> item.getAuthority())
-             .collect(Collectors.toList());
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
 
         UserInfoResponse response = new UserInfoResponse(userDetails.getId(),
-             userDetails.getUsername(), roles );
+                userDetails.getUsername(), roles);
 
         return ResponseEntity.ok().body(response);
     }
+
     @PostMapping("/signout")
-    public ResponseEntity<?> signoutUser() {
-              ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE , cookie.toString())
-             .body( new MessageResponse("You've have been signed out!"));
+    public ResponseEntity<?> signoutUser(){
+        ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,
+                        cookie.toString())
+                .body(new MessageResponse("You've been signed out!"));
     }
-
-
 }

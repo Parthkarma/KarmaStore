@@ -18,7 +18,7 @@ import java.io.IOException;
 public class ProductController {
 
     @Autowired
-    ProductService productService ;
+    ProductService productService;
 
     @PostMapping("/admin/categories/{categoryId}/product")
     public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO,

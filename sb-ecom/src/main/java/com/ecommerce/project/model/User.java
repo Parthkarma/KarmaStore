@@ -1,4 +1,5 @@
 package com.ecommerce.project.model;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -17,8 +18,7 @@ import java.util.Set;
         uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email")
-        }
-        )
+        })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,9 +63,11 @@ public class User {
                 joinColumns = @JoinColumn(name = "user_id"),
                 inverseJoinColumns = @JoinColumn(name = "address_id"))
     private List<Address> addresses = new ArrayList<>();
+
     @ToString.Exclude
-    @OneToOne(mappedBy =  "user" , cascade =  {CascadeType.PERSIST , CascadeType.MERGE} , orphanRemoval = true)
-    private  Cart cart ;
+    @OneToOne(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Cart cart;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "user",
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},

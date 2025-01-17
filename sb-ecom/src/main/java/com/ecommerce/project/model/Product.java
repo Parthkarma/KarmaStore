@@ -29,7 +29,7 @@ public class Product {
     private String image;
 
     @NotBlank
-    @Size(min = 6, message = "Product description must contain atleast 6 characters")
+    @Size(min = 1, message = "Product description must contain atleast 6 characters")
     private String description;
     private Integer quantity;
     private double price;
@@ -43,6 +43,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "seller_id")
     private User user;
-@OneToMany(mappedBy =  "product" , cascade =  {CascadeType.PERSIST, CascadeType.MERGE} , fetch =  FetchType.EAGER)
-    private List<CartItem> products = new ArrayList<>() ;
+
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<CartItem> products = new ArrayList<>();
 }
