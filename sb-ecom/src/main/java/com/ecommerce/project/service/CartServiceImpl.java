@@ -37,7 +37,6 @@ public class CartServiceImpl implements CartService{
     @Autowired
     ModelMapper modelMapper;
 
-
     @Override
     public CartDTO addProductToCart(Long productId, Integer quantity) {
         Cart cart  = createCart();
@@ -90,19 +89,7 @@ public class CartServiceImpl implements CartService{
 
         return cartDTO;
     }
-    private Cart createCart() {
-        Cart userCart  = cartRepository.findCartByEmail(authUtil.loggedInEmail());
-        if(userCart != null){
-            return userCart;
-        }
 
-        Cart cart = new Cart();
-        cart.setTotalPrice(0.00);
-        cart.setUser(authUtil.loggedInUser());
-        Cart newCart =  cartRepository.save(cart);
-
-        return newCart;
-    }
     @Override
     public List<CartDTO> getAllCarts() {
         List<Cart> carts = cartRepository.findAll();
@@ -211,6 +198,20 @@ public class CartServiceImpl implements CartService{
         return cartDTO;
     }
 
+
+    private Cart createCart() {
+        Cart userCart  = cartRepository.findCartByEmail(authUtil.loggedInEmail());
+        if(userCart != null){
+            return userCart;
+        }
+
+        Cart cart = new Cart();
+        cart.setTotalPrice(0.00);
+        cart.setUser(authUtil.loggedInUser());
+        Cart newCart =  cartRepository.save(cart);
+
+        return newCart;
+    }
 
 
     @Transactional
