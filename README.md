@@ -89,8 +89,7 @@
 - **Frontend Development**: Add a responsive UI with frameworks like React or Angular.  
 - **Advanced Search**: Implement search functionality with filters and sorting.  
 - **Notifications**: Send email notifications for order confirmations and updates.  
-- **Admin Dashboard**: Create a dedicated admin panel for managing the platform.  
-
+- **Use SpringAI" : Integrating AI  . 
 ---
 
 ## Contribution Guidelines 🤝  
