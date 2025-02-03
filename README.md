@@ -6,8 +6,6 @@
 
 ## 📚 API Documentation
 
-<img src="https://www.postman.com/_ar-assets/images/postman-logo-horizontal-orange.svg" alt="Postman" width="200"/>
-
 [![View in Postman](https://img.shields.io/badge/View%20Documentation-Postman-orange)](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt) [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt)
 
 Explore our API endpoints and test the functionality:
