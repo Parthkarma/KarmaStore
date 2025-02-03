@@ -60,11 +60,6 @@ Explore our API endpoints and test the functionality:
    mvn spring-boot:run
    ```
 
-### 🌐 Access Points
-- API Documentation: 
-  - Swagger UI: `http://localhost:8080/swagger-ui.html`
-  - Postman Collection: [View Documentation](your_postman_link_here)
-- Frontend (if applicable): `http://localhost:8080`
 
 ## 🔮 Future Enhancements
 - 🎨 **Frontend Development**: Add a responsive UI with frameworks like React or Angular
@@ -84,11 +79,4 @@ Explore our API endpoints and test the functionality:
 4. Push the changes to your forked repository
 5. Open a pull request and describe your changes
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 💬 Support
-For support and queries, please open an issue in the repository.
-
-## 👨‍💻 Authors
-- Your Name - Initial work - [YourGitHub](your_github_profile_link)
