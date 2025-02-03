@@ -2,8 +2,20 @@
 
 **SpringMartX** is a comprehensive e-commerce application built using **Spring Boot**, **Spring Security**, and other modern technologies in the Java ecosystem. The project demonstrates how to implement an e-commerce platform with features like category-based product management, user authentication, authorization, and payment integration. 
 
+[Previous sections remain the same until API Documentation]
+
 ## 📚 API Documentation
-[![View in Postman](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt)](your_postman_link_here)
+
+<img src="https://www.postman.com/_ar-assets/images/postman-logo-horizontal-orange.svg" alt="Postman" width="200"/>
+
+[![View in Postman](https://img.shields.io/badge/View%20Documentation-Postman-orange)](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt) [![Run in Postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt)
+
+Explore our API endpoints and test the functionality:
+- 📖 [Complete API Documentation](https://documenter.getpostman.com/view/33652413/2sAYX3sPPt)
+- 🔄 Import collection directly to your workspace
+- ⚡ Test endpoints with provided examples
+
+[Rest of the README remains the same]
 
 Explore our API endpoints and test the functionality:
 1. View complete documentation in Postman
